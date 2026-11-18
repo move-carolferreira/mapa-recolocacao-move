@@ -1,0 +1,586 @@
+/* ============================================================
+   Move+, pagina de produto
+   Clonada de css/move-flow.css. Depende dos tokens de css/style.css.
+   Identidade v2: Source Serif 4 + Source Sans 3, sem faixa de topo,
+   submarca so no fechamento.
+   ============================================================ */
+
+/* ---------- ritmo de secao ---------- */
+.mf-section { padding: 96px 0; }
+.mf-section.is-cream { background: var(--cream); }
+.mf-section.is-white { background: var(--white); }
+.mf-section.is-navy  { background: var(--navy); color: var(--cream); }
+
+.mf-section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.2;
+  color: var(--navy);
+  margin: 0 0 20px;
+  max-width: 22ch;
+}
+.mf-section.is-navy h2 { color: var(--cream); }
+
+.mf-section p { font-size: 18px; line-height: 1.65; color: var(--slate); }
+.mf-section.is-navy p { color: #D9E2EA; }
+.mf-prose { max-width: 68ch; }
+.mf-prose p + p { margin-top: 20px; }
+/* quando .mf-prose divide o elemento com .container, o container perderia
+   a largura total e o bloco ficaria centralizado, desalinhado das outras
+   secoes. Aqui o container mantem a largura e quem estreita e o filho. */
+.container.mf-prose { max-width: var(--max-width); }
+.container.mf-prose > * { max-width: 68ch; }
+
+.mf-eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--terracotta-deep);
+  margin: 0 0 14px;
+}
+.mf-section.is-navy .mf-eyebrow { color: var(--terracotta); }
+
+/* ---------- hero com foto, no padrao da home ---------- */
+.mf-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 86vh;
+  padding: 128px 0 96px;
+  overflow: hidden;
+  background: var(--navy-deep);
+  color: var(--white);
+}
+.mf-hero-media { position: absolute; inset: 0; }
+.mf-hero-media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+.mf-hero-overlay {
+  position: absolute; inset: 0;
+  /* veu so atras do texto; o resto da foto fica com a cor natural */
+  background: linear-gradient(90deg, rgba(12,35,56,.88) 0%, rgba(12,35,56,.72) 26%, rgba(12,35,56,.25) 44%, rgba(12,35,56,0) 58%);
+}
+/* como .mf-hero e flex, o .container virava item flex e encolhia pro tamanho
+   do conteudo, jogando o texto pro meio da foto. width:100% devolve ele
+   pra grade normal da pagina, alinhado a esquerda com as outras secoes. */
+.mf-hero-inner { position: relative; z-index: 1; width: 100%; }
+.mf-hero .mf-eyebrow { color: var(--terracotta); }
+.mf-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5.2vw, 52px);
+  line-height: 1.14;
+  color: var(--white);
+  margin: 0 0 26px;
+  max-width: 20ch;
+  text-shadow: 0 1px 24px rgba(12,35,56,.35);
+}
+.mf-hero .mf-lead {
+  font-size: 20px; line-height: 1.6;
+  color: rgba(242,234,226,.94);
+  max-width: 54ch;
+}
+.mf-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 24px; margin-top: 34px; }
+.mf-jump {
+  font-size: 15px;
+  color: var(--cream);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(242,234,226,.45);
+  padding-bottom: 2px;
+}
+.mf-jump:hover { border-bottom-color: var(--cream); }
+/* no celular a foto fica limpa no alto e o texto entra embaixo, sobre o azul.
+   Cada capa acerta o enquadramento pela variavel --pos-cel no proprio <img>. */
+@media (max-width: 820px) {
+  .mf-hero { min-height: 0; padding: 50vh 0 64px; }
+  .mf-hero-media { bottom: auto; height: 54vh; }
+  .mf-hero-media img { object-position: var(--pos-cel, 60% center); }
+  .mf-hero-overlay {
+    background: linear-gradient(0deg, var(--navy-deep) 0%, rgba(12,35,56,.55) 14%, rgba(12,35,56,0) 34%);
+  }
+}
+
+/* ---------- secao do problema, editorial em duas colunas ----------
+   Titulo ancora a esquerda, corpo numa coluna de ~72 caracteres. */
+.mf-problema-grid { display: grid; gap: 32px; }
+@media (min-width: 900px) {
+  .mf-problema-grid {
+    grid-template-columns: 0.82fr 1.18fr;
+    gap: 64px;
+    align-items: start;
+  }
+}
+.mf-problema-titulo h2 {
+  margin: 0;
+  max-width: 17ch;
+  font-size: clamp(26px, 3.4vw, 36px);
+}
+.mf-andorinha { width: 40px; height: auto; display: block; margin: 0 0 22px; }
+
+.mf-problema-corpo p {
+  font-size: 17px !important;
+  line-height: 1.7;
+  max-width: 72ch;
+}
+.mf-problema-corpo p + p { margin-top: 20px; }
+.mf-problema-corpo strong { color: var(--navy); font-weight: 600; }
+.mf-destaque {
+  font-family: var(--font-display);
+  font-size: clamp(21px, 2.6vw, 26px) !important;
+  line-height: 1.4;
+  color: var(--navy) !important;
+  margin-top: 30px !important;
+}
+.mf-assinatura {
+  font-family: var(--font-display);
+  font-size: clamp(19px, 2.2vw, 23px) !important;
+  color: var(--terracotta-deep) !important;
+  margin-top: 26px !important;
+  padding-top: 26px;
+  border-top: 1px solid rgba(24,69,112,.12);
+}
+
+/* sintomas: lista curta dentro da coluna de texto do problema */
+.mm-sintomas { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 12px; }
+.mm-sintomas li {
+  position: relative;
+  padding-left: 26px;
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--slate);
+}
+.mm-sintomas li::before {
+  content: "";
+  position: absolute; left: 0; top: 11px;
+  width: 14px; height: 1px;
+  background: var(--terracotta);
+}
+
+/* ---------- lista de reconhecimento ---------- */
+.mf-check { list-style: none; padding: 0; margin: 0; display: grid; gap: 20px; }
+@media (min-width: 860px) { .mf-check { grid-template-columns: 1fr 1fr; gap: 24px 44px; } }
+.mf-check li {
+  position: relative;
+  padding-left: 34px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--slate);
+}
+.mf-check li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 9px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--terracotta);
+}
+
+/* o outro lado da lista: pra quem o Move+ nao e */
+.mm-nao {
+  margin-top: 52px;
+  background: var(--white);
+  border: 1px solid rgba(24,69,112,.12);
+  border-radius: var(--radius);
+  padding: 30px 32px;
+}
+.mm-nao h3 { font-size: 21px; margin: 0 0 18px; color: var(--navy); }
+.mm-nao ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+@media (min-width: 860px) { .mm-nao ul { grid-template-columns: 1fr 1fr; gap: 12px 40px; } }
+.mm-nao li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: #6E7275;
+}
+.mm-nao li::before {
+  content: "";
+  position: absolute; left: 2px; top: 11px;
+  width: 12px; height: 1px;
+  background: #B9C2C9;
+}
+
+/* ---------- faixa de foto ----------
+   aspect-ratio igual ao do arquivo, pra respeitar o enquadramento. */
+.mf-band { display: block; line-height: 0; }
+.mf-band img { width: 100%; object-fit: cover; display: block; }
+.mf-band.band-pedras img { aspect-ratio: 1600 / 620; max-height: 440px; }
+.mf-band.band-mesa img { aspect-ratio: 1600 / 760; max-height: 500px; }
+@media (max-width: 640px) {
+  .mf-band.band-pedras img { aspect-ratio: 16 / 9; }
+  .mf-band.band-mesa img { aspect-ratio: 4 / 3; }
+}
+
+/* ---------- as cinco camadas do metodo ---------- */
+.mm-camadas { list-style: none; padding: 0; margin: 44px 0 0; }
+.mm-camada {
+  display: grid;
+  gap: 6px 26px;
+  padding: 28px 0;
+  border-top: 1px solid rgba(24,69,112,.14);
+}
+.mm-camada:last-child { border-bottom: 1px solid rgba(24,69,112,.14); }
+@media (min-width: 820px) {
+  .mm-camada { grid-template-columns: 82px minmax(0, 1fr); align-items: start; }
+}
+.mm-num {
+  font-family: var(--font-display);
+  font-size: 34px;
+  line-height: 1;
+  color: var(--terracotta);
+  padding-top: 4px;
+}
+.mm-camada h3 { font-size: 24px; margin: 0 0 6px; color: var(--navy); }
+.mm-pergunta {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 19px !important;
+  color: var(--terracotta-deep) !important;
+  margin: 0 0 12px !important;
+}
+.mm-camada-corpo p:last-child { margin: 0; max-width: 66ch; font-size: 17px !important; }
+.mm-encadeia {
+  margin-top: 32px;
+  background: rgba(24,69,112,.06);
+  border-left: 3px solid var(--terracotta);
+  border-radius: 0 10px 10px 0;
+  padding: 18px 22px;
+  font-size: 16px !important;
+  line-height: 1.6;
+  color: var(--slate) !important;
+  max-width: 860px;
+}
+
+/* ---------- os dois formatos ---------- */
+.mm-base {
+  background: var(--white);
+  border: 1px solid rgba(24,69,112,.12);
+  border-radius: var(--radius);
+  padding: 34px 32px;
+  margin-top: 8px;
+}
+.mm-base h3 { font-size: 23px; margin: 0 0 10px; color: var(--navy); }
+.mm-base > p { font-size: 17px !important; max-width: 74ch; margin: 0; }
+.mm-base ul { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 14px; }
+@media (min-width: 860px) { .mm-base ul { grid-template-columns: 1fr 1fr; gap: 14px 40px; } }
+.mm-base li {
+  position: relative;
+  padding-left: 30px;
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--slate);
+}
+.mm-base li::before {
+  content: "";
+  position: absolute; left: 0; top: 8px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--terracotta);
+}
+
+.mm-formatos { display: grid; gap: 26px; margin-top: 28px; align-items: start; }
+@media (min-width: 1080px) { .mm-formatos { grid-template-columns: repeat(3, 1fr); gap: 28px; } }
+.mm-formato {
+  background: var(--white);
+  border: 1px solid rgba(24,69,112,.12);
+  border-radius: var(--radius);
+  padding: 32px 30px;
+}
+.mm-formato.is-fundo { background: #FBF8F5; border-color: rgba(210,129,103,.35); }
+.mm-tag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 12.5px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--terracotta-deep);
+  background: rgba(210,129,103,.14);
+  border-radius: 999px;
+  padding: 5px 12px;
+  margin-bottom: 14px;
+}
+.mm-formato h3 { font-size: 26px; margin: 0 0 10px; color: var(--navy); }
+.mm-formato > p { font-size: 16.5px !important; line-height: 1.6; margin: 0; }
+.mm-encontros { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 18px; }
+.mm-encontros li { padding-left: 20px; border-left: 2px solid rgba(210,129,103,.5); }
+.mm-encontros strong { display: block; font-size: 16px; color: var(--navy); margin-bottom: 4px; }
+.mm-encontros span { display: block; font-size: 15.5px; line-height: 1.55; color: var(--slate); }
+.mm-formato-nota {
+  margin-top: 24px !important;
+  padding-top: 20px;
+  border-top: 1px solid rgba(24,69,112,.10);
+  font-size: 15.5px !important;
+  color: #6E7275 !important;
+}
+
+/* regra de venda: a diferenca e a profundidade, nao o que voce recebe */
+.mm-regra {
+  margin-top: 32px !important;
+  font-family: var(--font-display);
+  font-size: clamp(19px, 2.3vw, 24px) !important;
+  line-height: 1.4;
+  color: var(--navy) !important;
+  max-width: 44ch;
+}
+
+/* ---------- o que vem nos dois formatos ---------- */
+.mm-incluso { list-style: none; padding: 0; margin: 44px 0 0; display: grid; gap: 18px; }
+@media (min-width: 720px) { .mm-incluso { grid-template-columns: 1fr 1fr; gap: 20px 40px; } }
+@media (min-width: 1000px) { .mm-incluso { grid-template-columns: repeat(3, 1fr); } }
+.mm-incluso li { border-top: 1px solid rgba(24,69,112,.14); padding-top: 16px; }
+.mm-incluso strong {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 13px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--terracotta-deep);
+  margin-bottom: 7px;
+}
+.mm-incluso span { display: block; font-size: 16px; line-height: 1.55; color: var(--slate); }
+
+/* ---------- secao navy com o perfil ---------- */
+.mf-split { display: grid; gap: 40px; align-items: center; }
+@media (min-width: 920px) { .mf-split { grid-template-columns: 1.1fr .9fr; gap: 64px; } }
+.mf-split-img { border-radius: var(--radius); overflow: hidden; }
+.mf-split-img img { width: 100%; height: 100%; max-height: 580px; object-fit: cover; display: block; }
+.mf-levels { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 22px; }
+.mf-levels li { padding-left: 20px; border-left: 2px solid var(--terracotta); }
+.mf-levels strong { display: block; color: var(--cream); font-size: 17px; margin-bottom: 5px; }
+.mf-levels span { font-size: 16px; line-height: 1.6; color: #D9E2EA; }
+/* o 89% nunca aparece sozinho: a ressalva anda na mesma frase */
+.mm-numero {
+  margin-top: 32px !important;
+  background: rgba(242,234,226,.08);
+  border: 1px solid rgba(242,234,226,.18);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  font-size: 16px !important;
+  line-height: 1.65;
+  color: #D9E2EA !important;
+}
+.mm-numero strong { color: var(--cream); font-weight: 600; }
+
+/* ---------- antes e depois ----------
+   Cada par e um cartao com uma seta no meio. A seta carrega a direcao,
+   entao nao precisa de rotulo repetido linha a linha em tela larga. */
+.mf-shift { display: grid; gap: 12px; margin-top: 40px; }
+.mf-pair {
+  display: grid;
+  gap: 12px;
+  background: var(--white);
+  border: 1px solid rgba(24,69,112,.10);
+  border-radius: var(--radius);
+  padding: 22px 26px;
+}
+.mf-before, .mf-after { font-size: 16.5px; line-height: 1.55; margin: 0; }
+.mf-before { color: #6E7275; }
+.mf-after  { color: var(--navy); font-weight: 600; }
+.mf-arrow { display: block; width: 22px; height: 22px; position: relative; flex: none; }
+.mf-arrow::before {
+  content: ""; position: absolute; left: 4px; top: 10px;
+  width: 14px; height: 2px; background: var(--terracotta);
+}
+.mf-arrow::after {
+  content: ""; position: absolute; right: 4px; top: 6px;
+  width: 8px; height: 8px;
+  border-top: 2px solid var(--terracotta);
+  border-right: 2px solid var(--terracotta);
+  transform: rotate(45deg);
+}
+/* no celular a seta deita pra baixo e os rotulos voltam */
+@media (max-width: 819px) {
+  .mf-arrow { transform: rotate(90deg); margin: 2px 0 2px 2px; }
+  .mf-before::before {
+    content: "Antes";
+    display: block; font-size: 13px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--terracotta-deep); margin-bottom: 5px;
+  }
+  .mf-after::before {
+    content: "Depois";
+    display: block; font-size: 13px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--terracotta-deep); margin-bottom: 5px;
+  }
+}
+@media (min-width: 820px) {
+  .mf-pair {
+    grid-template-columns: 1fr auto 1fr;
+    gap: 30px;
+    align-items: center;
+    padding: 24px 32px;
+  }
+}
+/* titulo que precisa caber em uma linha so */
+.mf-section h2.is-wide { max-width: none; }
+
+/* ---------- depoimentos ---------- */
+.mf-quote { max-width: 760px; margin: 0 auto 24px; text-align: center; }
+.mf-quote blockquote {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3.2vw, 31px);
+  line-height: 1.35;
+  color: var(--navy);
+  margin: 0 0 20px;
+}
+.mf-quote cite { font-style: normal; font-size: 15px; color: var(--slate); }
+.mf-quote cite strong { display: block; color: var(--navy); font-size: 16px; margin-bottom: 2px; }
+
+.mm-stats {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 18px 44px;
+  max-width: 760px;
+  margin: 0 auto 52px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(24,69,112,.12);
+}
+.mm-stats div { text-align: center; }
+.mm-stats .n {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 30px; line-height: 1.1; color: var(--navy);
+}
+.mm-stats .l { display: block; font-size: 14px; color: #6E7275; margin-top: 4px; }
+
+.mf-stories { display: grid; gap: 26px; }
+@media (min-width: 880px) { .mf-stories { grid-template-columns: 1fr 1fr; gap: 30px; } }
+.mf-story {
+  background: var(--white);
+  border: 1px solid rgba(24,69,112,.12);
+  border-radius: var(--radius);
+  padding: 28px 26px;
+}
+.mf-story p { font-size: 16px; line-height: 1.62; margin: 0 0 16px; }
+.mf-story .who { display: block; font-size: 16px; font-weight: 700; color: var(--navy); }
+.mf-story .role { display: block; font-size: 14px; color: var(--terracotta-deep); margin-top: 3px; }
+
+/* ---------- sanfonas ---------- */
+.mf-acc { border-top: 1px solid rgba(24,69,112,.14); margin-top: 30px; }
+.mf-acc details { border-bottom: 1px solid rgba(24,69,112,.14); }
+.mf-acc summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 22px 44px 22px 0;
+  position: relative;
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.45;
+}
+.mf-acc summary::-webkit-details-marker { display: none; }
+.mf-acc summary::after {
+  content: ""; position: absolute; right: 8px; top: 50%;
+  width: 11px; height: 11px; margin-top: -7px;
+  border-right: 2px solid var(--terracotta-acao);
+  border-bottom: 2px solid var(--terracotta-acao);
+  transform: rotate(45deg);
+  transition: transform .18s ease;
+}
+.mf-acc details[open] summary::after { transform: rotate(-135deg); margin-top: -3px; }
+.mf-acc .mf-acc-body { padding: 0 0 24px; }
+.mf-acc .mf-acc-body p { font-size: 17px; line-height: 1.65; margin: 0; }
+.mf-acc .mf-acc-body p + p { margin-top: 16px; }
+
+/* ---------- investimento, os dois formatos lado a lado ---------- */
+.mm-precos { display: grid; gap: 24px; margin-top: 34px; align-items: stretch; }
+@media (min-width: 980px) { .mm-precos { grid-template-columns: repeat(3, 1fr); gap: 26px; } }
+.mm-preco {
+  background: var(--white);
+  border: 1px solid rgba(24,69,112,.12);
+  border-radius: var(--radius);
+  padding: 34px 30px;
+  display: flex;
+  flex-direction: column;
+}
+.mm-preco.is-fundo { background: #FBF8F5; border-color: rgba(210,129,103,.35); }
+.mm-preco h3 { font-size: 24px; margin: 0 0 4px; color: var(--navy); }
+.mm-preco .mm-preco-sub { font-size: 15px !important; color: var(--terracotta-deep) !important; margin: 0 0 22px; }
+.mm-valor {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 5.5vw, 52px);
+  line-height: 1;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+.mm-preco .mm-cond { font-size: 16.5px !important; margin: 0 0 6px; }
+.mm-preco .mm-pix { font-size: 16.5px !important; color: var(--navy) !important; font-weight: 600; margin: 0; }
+/* margin-top auto alinha as duas notas na base, mesmo com texto de tamanhos
+   diferentes nos dois cartoes */
+.mm-preco .mm-inclui {
+  margin: 22px 0 0;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid rgba(24,69,112,.10);
+  font-size: 15.5px !important;
+  color: #6E7275 !important;
+}
+.mm-preco-nota {
+  text-align: center;
+  font-size: 15.5px !important;
+  color: #6E7275 !important;
+  margin: 30px auto 0;
+  max-width: 620px;
+}
+
+/* ---------- fechamento ---------- */
+.mf-close { background: var(--navy); color: var(--cream); padding: 92px 0 64px; text-align: center; }
+.mf-close h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4.2vw, 40px);
+  line-height: 1.2;
+  color: var(--cream);
+  margin: 0 auto 18px;
+  max-width: 22ch;
+}
+.mf-close p { color: #D9E2EA; font-size: 17px; max-width: 480px; margin: 0 auto 32px; }
+.mf-close .mf-wordmark { display: block; width: 170px; margin: 64px auto 0; opacity: .9; }
+
+@media (max-width: 640px) {
+  .mf-section { padding: 68px 0; }
+  .mf-hero { padding: 50vh 0 56px; }
+  .mm-formato, .mm-preco, .mm-base, .mm-nao { padding: 26px 22px; }
+  .mm-num { font-size: 28px; }
+}
+
+/* ============ MAPA DE RECOLOCAÇÃO (só nesta página) ============ */
+.mf-price-wrap { text-align: center; max-width: 640px; margin: 0 auto; }
+.mf-price {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 8vw, 76px);
+  line-height: 1;
+  color: var(--navy);
+  margin: 6px 0 14px;
+}
+.mf-price-de { display: block; font-size: 20px; color: #636B6D; text-decoration: line-through; margin-top: 10px; }
+.mf-price-note { font-size: 18px; color: var(--slate); margin: 0; }
+.mf-price-sub { font-size: 16px; color: #636B6D; margin: 18px 0 0; }
+.mf-price-wrap .btn { margin-top: 30px; }
+/* a luminaria da capa do Mapa cruza o titulo: veu mais firme so no computador */
+@media (min-width: 821px) {
+  .mp-hero .mf-hero-overlay {
+    background: linear-gradient(90deg, rgba(12,35,56,.96) 0%, rgba(12,35,56,.92) 32%, rgba(12,35,56,.6) 48%, rgba(12,35,56,0) 62%);
+  }
+}
+.mf-price-wrap .mp-bf { margin-left: auto; margin-right: auto; }
+.mp-bf {
+  display: table;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #A66651;
+  border-radius: 999px;
+  padding: 7px 14px;
+  margin-bottom: 18px;
+}
+.mp-hero-preco { margin: 22px 0 0; font-size: 17px; color: rgba(255,255,255,.9); }
+.mp-hero-preco s { color: rgba(255,255,255,.65); margin-right: 6px; }
+.mp-hero-preco strong { font-size: 20px; }
+.mp-bonus { margin-top: 40px; }
+.mf-problema-corpo .mm-sintomas { margin-bottom: 26px; }
+.mm-stats { max-width: 900px; }
+.mm-stats div { flex: 1 1 200px; }
